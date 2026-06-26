@@ -1,0 +1,88 @@
+datasource db {
+  provider = "postgresql"
+
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Gender {
+  HOMBRE
+  MUJER
+  UNISEX
+}
+
+enum OrderStatus {
+  PENDIENTE
+  PROCESANDO
+  ENTREGADO
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Brand {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  logo        String?   // URL de Cloudinary
+  products    Product[]
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  description String
+  price       Float       // En DOP (Pesos Dominicanos)
+  stock       Int
+  gender      Gender
+  size        Int         // En ml (ej: 100, 50)
+  images      String[]    // URLs de Cloudinary
+  topNotes    String[]    // Notas de salida
+  heartNotes  String[]    // Notas de corazón
+  baseNotes   String[]    // Notas de fondo
+  
+  brandId     String
+  brand       Brand       @relation(fields: [brandId], references: [id])
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  total      Float
+  status     OrderStatus @default(PENDIENTE)
+  address    String
+  phone      String
+  userId     String
+  user       User        @relation(fields: [userId], references: [id])
+  items      OrderItem[]
+  createdAt  DateTime    @default(now())
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  quantity  Int
+  price     Float    // Guardamos el precio al que se compró en ese momento
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+
+
