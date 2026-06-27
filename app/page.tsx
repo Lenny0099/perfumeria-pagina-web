@@ -114,7 +114,6 @@ export default async function HomePage() {
         </section>
       </div>
 
-
       {/* =========================================================
           2. ESTRUCTURA PARA DISPOSITIVOS MÓVILES (Menor que md)
           ========================================================= */}
