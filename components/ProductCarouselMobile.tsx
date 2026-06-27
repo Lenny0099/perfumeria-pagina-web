@@ -51,6 +51,42 @@ const RECOMENDADOS_PREMIUM: Perfume[] = [
     genero: 'UNISEX',
     coleccionEtiqueta: 'Clásico Moderno #3',
     rareza: 4
+  },
+
+  {
+    id: '3',
+    name: 'Eros Eau de Toilette',
+    brandName: 'VERSACE',
+    price: 3100,
+    images: ['/perfumes/eros.jpg'],
+    size: 100,
+    genero: 'UNISEX',
+    coleccionEtiqueta: 'Clásico Moderno #3',
+    rareza: 4
+  },
+
+  {
+    id: '3',
+    name: 'Eros Eau de Toilette',
+    brandName: 'VERSACE',
+    price: 3100,
+    images: ['/perfumes/eros.jpg'],
+    size: 100,
+    genero: 'UNISEX',
+    coleccionEtiqueta: 'Clásico Moderno #3',
+    rareza: 4
+  },
+
+  {
+    id: '3',
+    name: 'Eros Eau de Toilette',
+    brandName: 'VERSACE',
+    price: 3100,
+    images: ['/perfumes/eros.jpg'],
+    size: 100,
+    genero: 'UNISEX',
+    coleccionEtiqueta: 'Clásico Moderno #3',
+    rareza: 4
   }
 ];
 

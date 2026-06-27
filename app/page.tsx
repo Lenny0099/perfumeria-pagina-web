@@ -124,7 +124,7 @@ export default async function HomePage() {
               <h2 className="text-3xl md:text-4xl font-light tracking-tight text-stone-900 leading-tight">
                 Lujo portátil: Tus esencias favoritas en <span className="font-serif italic">decants de 10ml</span>.
               </h2>
-              <p className="text-sm text-stone-500 font-light leading-relaxed max-w-xl">
+              <p className="text-sm text-stone-500 font-black leading-relaxed max-w-xl">
                 Lleva tu fragancia exclusiva contigo a cualquier lugar. Nuestros atomizadores matte black de 10ml son recargables, discretos y diseñados para proteger la integridad de cada aroma, perfectos para el bolsillo o bolso de mano.
               </p>
               
@@ -142,12 +142,7 @@ export default async function HomePage() {
 
               {/* Botón al Catálogo de Decants */}
               <div className="pt-4">
-                <Link 
-                  href="/catalogo?formato=decant" 
-                  className="inline-block bg-white text-stone-900 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border border-stone-200 hover:border-stone-900 active:scale-[0.98]"
-                >
-                  Ver todos los decants
-                </Link>
+                
               </div>
             </div>
 
