@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    // Esto obliga a Vercel a saltarse el chequeo de TypeScript sí o sí
+    // Esto le dice a Vercel: "Ignora cualquier error de TypeScript y compila la web"
     ignoreBuildErrors: true,
   },
   eslint: {
-    // De paso ignoramos ESLint por si acaso
+    // Ignoramos también advertencias estéticas para que no te trabe el deploy
     ignoreDuringBuilds: true,
   }
 };
