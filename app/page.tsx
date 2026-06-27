@@ -107,12 +107,13 @@ export default async function HomePage() {
         {/* GRILLA DE PRODUCTOS DE LA BASE DE DATOS */}
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
-            {products.map((product) => (
+            {products.map((product: any) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
       </div>
+
 
       {/* =========================================================
           2. ESTRUCTURA PARA DISPOSITIVOS MÓVILES (Menor que md)
