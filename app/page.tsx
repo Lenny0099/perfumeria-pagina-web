@@ -1,22 +1,27 @@
 import { prisma } from '@/lib/prisma';
-// 🛠️ Al ser "export default" en tu componente, se importa SIN llaves {}.
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
-import { Sparkles, MapPin, CheckCircle, ShieldCheck, Award, Package } from 'lucide-react';
+import Image from 'next/image';
+import { Sparkles, MapPin, CheckCircle, ShieldCheck, Award, Package, Flame } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  // Traemos los perfumes de la base de datos
+  // Traemos todos los perfumes de la base de datos
   const products = await prisma.product.findMany({
     include: { brand: true },
     orderBy: { createdAt: 'desc' }
   });
 
+  // Tomamos los primeros 3 perfumes de la base de datos para las Tarjetas Destacadas
+  const featuredProducts = products.slice(0, 3);
+
   return (
-    <div className="w-full bg-white pb-24">
+    <div className="w-full bg-white text-stone-900 pb-24">
       
-      {/* HERO PRINCIPAL (Ahora visible en todos los dispositivos) */}
+      {/* =========================================================
+          1. HERO INFORMATIVO PRINCIPAL (Estable en todas las pantallas)
+          ========================================================= */}
       <section className="relative overflow-hidden bg-stone-50 border-b border-stone-100 px-4 pt-16 pb-16 sm:pt-24 sm:pb-24 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e7e5e4_1px,transparent_1px),linear-gradient(to_bottom,#e7e5e4_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none select-none" />
         
@@ -37,7 +42,7 @@ export default async function HomePage() {
               </h1>
               
               <p className="max-w-xl text-sm text-stone-500 font-light tracking-wide leading-relaxed">
-                Conectamos a entusiastas y coleccionistas con las composiciones olfativas más galawardadas del mundo. Desde botellas completas hasta formatos de viaje controlados.
+                Conectamos a entusiastas y coleccionistas con las composiciones olfativas más galardonadas del mundo. Desde botellas completas hasta formatos de viaje controlados.
               </p>
 
               <div className="pt-2 sm:pt-4">
@@ -101,8 +106,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* GRILLA DE PRODUCTOS DE LA BASE DE DATOS (Mismo contenido en todas las pantallas) */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
+      {/* =========================================================
+          3. SECCIÓN GENERAL: TODOS LOS PRODUCTOS DEL CATÁLOGO
+          ========================================================= */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-24">
+        <div className="border-b border-stone-100 pb-4 mb-8">
+          <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-500">
+            Explorar Colección Completa
+          </h2>
+        </div>
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
           {products.map((product: any) => (
             <ProductCard key={product.id} product={product} />
@@ -110,10 +122,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* SECCIÓN FINAL: FORMATOS DE VIAJE / DECANT ÚNICO */}
+      {/* =========================================================
+          4. SECCIÓN FINAL: FORMATOS DE VIAJE / DECANT ÚNICO (Blindado para Móvil)
+          ========================================================= */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-32 mb-16 w-full clear-both">
         <div className="border-t border-stone-100 pt-16 md:pt-24">
-          
           <div className="flex flex-col md:grid md:grid-cols-12 gap-12 items-center">
             
             {/* Bloque de Texto */}
@@ -124,7 +137,7 @@ export default async function HomePage() {
               <h2 className="text-3xl md:text-4xl font-light tracking-tight text-stone-900 leading-tight">
                 Lujo portátil: Tus esencias favoritas en <span className="font-serif italic">decants de 10ml</span>.
               </h2>
-              <p className="text-sm text-stone-500 font-black leading-relaxed max-w-xl">
+              <p className="text-sm text-stone-500 font-light leading-relaxed max-w-xl">
                 Lleva tu fragancia exclusiva contigo a cualquier lugar. Nuestros atomizadores matte black de 10ml son recargables, discretos y diseñados para proteger la integridad de cada aroma, perfectos para el bolsillo o bolso de mano.
               </p>
               
@@ -140,26 +153,33 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {/* Botón al Catálogo de Decants */}
+              {/* Botón */}
               <div className="pt-4">
-                
+                <Link 
+                  href="/catalogo?formato=decant" 
+                  className="inline-block bg-white text-stone-900 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border border-stone-200 hover:border-stone-900 active:scale-[0.98]"
+                >
+                  Ver todos los decants
+                </Link>
               </div>
             </div>
 
-            {/* Imagen del Decant */}
+            {/* Imagen del Decant (Usando el componente oficial Image con tamaños fijos para móvil) */}
             <div className="md:col-span-5 flex justify-center md:justify-end w-full pt-4 md:pt-0">
-              <div className="relative aspect-square w-full max-w-[280px] bg-stone-50 border border-stone-100 p-2 group overflow-hidden shadow-sm">
-                <img 
+              <div className="relative w-full max-w-[280px] h-[280px] bg-stone-50 border border-stone-100 p-2 group overflow-hidden shadow-sm">
+                <Image 
                   src="/images/ato.jpg" 
                   alt="Colección de decants de perfume de 10ml"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 280px, 280px"
+                  priority
+                  className="p-2 object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </div>
 
           </div>
-
         </div>
       </section>
 
