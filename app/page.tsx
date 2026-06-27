@@ -13,7 +13,7 @@ export default async function HomePage() {
     orderBy: { createdAt: 'desc' }
   });
 
-  // Tomamos los primeros 3 perfumes de la base de datos para las Tarjetas Destacadas
+  // Tomamos los primeros 5 perfumes de la base de datos para las Tarjetas Destacadas
   const featuredProducts = products.slice(0, 3);
 
   return (
@@ -155,12 +155,7 @@ export default async function HomePage() {
 
               {/* Botón */}
               <div className="pt-4">
-                <Link 
-                  href="/catalogo?formato=decant" 
-                  className="inline-block bg-white text-stone-900 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border border-stone-200 hover:border-stone-900 active:scale-[0.98]"
-                >
-                  Ver todos los decants
-                </Link>
+               
               </div>
             </div>
 

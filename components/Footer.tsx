@@ -5,13 +5,13 @@ export default function Footer() {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <footer className="bg-stone-1000 border-t border-stone-800 text-stone-400 py-16">
+    <footer className="bg-stone-800 border-t border-stone-800 text-stone-400 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 pb-12 border-b border-stone-800">
           
           {/* Columna 1: Marca */}
           <div className="md:col-span-1">
-            <span className="text-sm font-black tracking-[0.2em] text-stone-100 uppercase">
+            <span className="text-sm font-black tracking-[0.3em] text-stone-300 uppercase">
               Fragancia_Galan
             </span>
             <p className="mt-4 text-xs font-black text-stone-400 leading-relaxed max-w-xs">
