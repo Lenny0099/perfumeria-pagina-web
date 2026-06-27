@@ -4,7 +4,7 @@ import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 import ProductCarouselMobile from "@/components/ProductCarouselMobile";
 import { Sparkles, MapPin, CheckCircle, ShieldCheck, Award, Package } from 'lucide-react';
-
+export const dynamic = 'force-dynamic';
 export default async function HomePage() {
   // Traemos los perfumes de la base de datos
   const products = await prisma.product.findMany({
